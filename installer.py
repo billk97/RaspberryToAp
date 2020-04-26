@@ -4,7 +4,7 @@ print("Starting script")
 static_ip = input("Enter static ip: ")
 channel = 7
 ssid = input("ssidName: ")
-password = str(input("password"))
+password = input("password")
 print("installing hostapt")
 os.system("sudo apt install hostapd")
 print("installing dnsmasq")
@@ -32,7 +32,7 @@ file_hostapd = open("/etc/hostapd/hostapd.conf", "w")
 file_hostapd.write("interface=wlan0 \n "
                    "bridge=br0 \n "
                    "hw_mode=g \n "
-                   "channel=" +channel+"\n"
+                   "channel= {} \n"
                    "wmm_enabled=0 \n"
                    "macaddr_acl=0 \n"
                     "auth_algs=1 \n"
@@ -41,8 +41,8 @@ file_hostapd.write("interface=wlan0 \n "
                     "wpa_key_mgmt=WPA-PSK \n"
                     "wpa_pairwise=TKIP \n"
                     "rsn_pairwise=CCMP \n"
-                    "ssid=", ssid, " \n"
-                    "wpa_passphrase=", password)
+                    "ssid=ssid \n"
+                    "wpa_passphrase={}".format(channel, ssid, password))
 file_hostapd.close()
 #file_default_hostapd = open("/etc/default/hostapd" "rw")
 #sudo nano /etc/sysctl.conf
