@@ -4,7 +4,7 @@ print("Starting script")
 static_ip = input("Enter static ip: ")
 channel = 7
 ssid = input("ssidName: ")
-password = input("password")
+password = str(input("password"))
 print("installing hostapt")
 os.system("sudo apt install hostapd")
 print("installing dnsmasq")
