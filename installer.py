@@ -41,8 +41,8 @@ file_hostapd.write("interface=wlan0 \n "
                     "wpa_key_mgmt=WPA-PSK \n"
                     "wpa_pairwise=TKIP \n"
                     "rsn_pairwise=CCMP \n"
-                    "ssid=" +ssid+" \n"
-                    "wpa_passphrase=" , password )
+                    "ssid=", ssid, " \n"
+                    "wpa_passphrase=", password)
 file_hostapd.close()
 #file_default_hostapd = open("/etc/default/hostapd" "rw")
 #sudo nano /etc/sysctl.conf
