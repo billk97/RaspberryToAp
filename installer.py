@@ -65,7 +65,7 @@ with open("/etc/default/hostapd", "r") as file_def_hostapd:
     file_content = file_def_hostapd.readlines()
 file_def_hostapd.close()
 file_content[12] = DAEMON_CONF="/etc/hostapd/hostapd.conf"
-with open("/etc/default/hostapd", "r") as file_def_hostapd:
+with open("/etc/default/hostapd", "w") as file_def_hostapd:
     file_def_hostapd.writelines(file_content)
 file_def_hostapd.close()
 print("====== done /etc/default/hostapd ======")
