@@ -92,5 +92,6 @@ file_network_interfaces = open("/etc/network/interfaces", "a")
 file_network_interfaces.write("auto br0 \n"
                               "iface br0 inet manual \n"
                               "bridge_ports eth0 wlan0 \n")
+os.system("sudo rfkill unblock 0")
 print("Done installation finished successfully")
 print("if all gone well please reboot!!!")
