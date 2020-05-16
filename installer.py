@@ -22,10 +22,7 @@ os.system("sudo systemctl stop dnsmasq")
 # opening file to write settings
 print("====== opening /etc/dhcpcd.conf ======")
 file_dhcpcd = open("/etc/dhcpcd.conf", "a")
-file_dhcpcd.write("\n interface wla0 \n"
-           "denyinterfaces eth0 \n"
-           "denyinterfaces wlan0 \n"
-          "static ip_address={} \n".format(static_ip))
+file_dhcpcd.write("\n denyinterfaces eth0 \n denyinterfaces wlan0 \n \n interface br0 \n static ip_address={} \n".format(static_ip))
 file_dhcpcd.close()
 print("====== done /etc/dhcpcd.conf ======")
 print("====== copping /etc/dnsmasq.conf -> /etc/dnsmasq.conf.orig ======")
@@ -73,7 +70,7 @@ print("====== changing /etc/sysctl.conf ======")
 with open("/etc/sysctl.conf", "r") as file_sysctl_conf:
     content_sysctl_conf = file_sysctl_conf.readlines()
 file_sysctl_conf.close()
-content_sysctl_conf = "net.ipv4.ip_forward=1"
+content_sysctl_conf[27] = "net.ipv4.ip_forward=1"
 with open("/etc/sysctl.conf", "w") as file_sysctl_conf:
     file_sysctl_conf.writelines(content_sysctl_conf)
 file_sysctl_conf.close()
@@ -91,7 +88,7 @@ print("====== connecting interfacess ======")
 os.system("sudo brctl addbr br0")
 os.system("sudo brctl addif br0 eth0")
 print("====== changing /etc/interfaces ======")
-file_network_interfaces = open("/etc/interfaces", "a")
+file_network_interfaces = open("/etc/network/interfaces", "a")
 file_network_interfaces.write("auto br0 \n"
                               "iface br0 inet manual \n"
                               "bridge_ports eth0 wlan0 \n")
